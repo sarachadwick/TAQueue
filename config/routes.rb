@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'courses/new'
+
+  get 'courses/create'
+
   get 'sessions/new'
 
   root 'menus#home'  
