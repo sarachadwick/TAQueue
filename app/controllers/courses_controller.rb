@@ -6,7 +6,7 @@ class CoursesController < ApplicationController
   def create
     @course = Course.new(user_params)
     if @course.save
-      redirect_to '/'
+      redirect_to root
     else
       render 'new'
     end
