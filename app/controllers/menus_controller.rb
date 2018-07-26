@@ -1,7 +1,7 @@
 class MenusController < ApplicationController
 
   def home
-    @users = User.all
+    @users =  User.all
   end
 
 end
