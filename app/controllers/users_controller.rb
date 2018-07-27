@@ -17,6 +17,16 @@ class UsersController < ApplicationController
     end
   end
 
+  def start
+    @user = User.find_by(id: params[:id])
+    @user.update_attribute(:active, true)
+  end
+
+  def end
+    @user = User.find_by(id: params[:id])
+    @user.update_attribute(:active, false)
+  end
+  
   private
   
     def user_params

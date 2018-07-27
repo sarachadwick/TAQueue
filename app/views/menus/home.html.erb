@@ -13,21 +13,21 @@
       <div class="row">
         
         <div class="col-lg-8">
-          <table class="table table-striped table-hover">
+          <table class="table table-striped table-hover" style="table-layout: fixed">
             <tr>
               <th colspan="2"><h3>Students</h3></th>
             </tr>
             <tr>
-              <td>Name</td>
-              <td>Reason</td>
+              <td style="width: 100px"><h5>Name</h5></td>
+              <td><h5>Reason</h5></td>
             </tr>
             
             <tr>
-              <td>Mockup User <span class="badge badge-primary">being helped by <%= @users[0].name %></span></td>
+              <td "width: 75px">Mockup User <span class="badge badge-primary">being helped by </span></td>
               <td>I need help!</td>
             </tr>
             <tr>
-              <td>Mockup User <span class="badge badge-warning">waiting</span></td>
+              <td "width: 75px">Mockup User <span class="badge badge-warning">waiting</span></td>
               <td>I need help!</td>
             </tr>
             
@@ -40,8 +40,8 @@
               <th colspan="2"><h3>TAs</h3></th>
             </tr>
             <tr>
-              <td>Name</td>
-              <td>Status</td>
+              <td><h5>Name</h5></td>
+              <td><h5>Status</h5></td>
             </tr>
             <% @users.each do |user| %>
             <tr>

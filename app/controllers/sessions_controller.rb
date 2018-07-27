@@ -13,6 +13,10 @@ class SessionsController < ApplicationController
   end
 
   def destroy
+    # If a TA signs out w/o ending their hours, do it for 'em
+    @user = User.find_by(params[:id])
+    @user.update_attribute(:active, false)
+    
     log_out
     redirect_to root_url
   end
