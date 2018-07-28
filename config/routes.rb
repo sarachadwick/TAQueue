@@ -19,5 +19,11 @@ Rails.application.routes.draw do
   get    '/login',   to: 'sessions#new'
   post   '/login',   to: 'sessions#create'
   delete '/logout',  to: 'sessions#destroy'
+
+  get '/get_help', to: 'students#new'
+  post '/get_help', to: 'students#create'
+
+  get '/student/:student_id/help' => 'students#help', as: :help
+  get 'student/:student_id/end_session' => 'students#end_session', as: :end_session
   resources :users
 end

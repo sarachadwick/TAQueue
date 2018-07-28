@@ -1,2 +1,21 @@
-<h1>Students#new</h1>
-<p>Find me in app/views/students/new.html.erb</p>
+<% provide(:title, 'Get Help') %>
+<h1>Get Help</h1>
+
+<div>
+  <div>
+    <%= form_for(@student, url: get_help_path) do |f| %>
+      <%= render 'shared/error_messages' %>
+
+      <%= f.label :name %>
+      <%= f.text_field :name, class: 'form-control' %>
+      
+      <%= f.label :reason %>
+      <%= f.text_field :reason, class: 'form-control' %>
+
+      <%= f.label :course %>
+      <%= f.text_field :course, class: 'form-control' %>
+
+      <%= f.submit "Sign In For Help", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>
