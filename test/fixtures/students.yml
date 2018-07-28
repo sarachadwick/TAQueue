@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  course: MyString
+  name: MyString
+  reason: MyString
+  being_helped: false
+
+two:
+  course: MyString
+  name: MyString
+  reason: MyString
+  being_helped: false

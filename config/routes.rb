@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'students/new'
+
+  get 'students/create'
+
   get 'courses/new'
 
   get 'courses/create'

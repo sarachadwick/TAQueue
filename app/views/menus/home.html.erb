@@ -7,7 +7,17 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
   </head>
   
-  <body>  
+  <body>
+    <center>
+      <div class="d-flex justify-content-center">
+        <div class = "container-fluid" style="margin:25px">
+          <button type="button" class="btn btn-info" data-toggle="modal" data-target="#courseModal">
+            Choose Course
+          </button>
+        </div>
+      </div>
+    </center>
+    
     <div class = "container-fluid">
       
       <div class="row">
@@ -21,16 +31,23 @@
               <td style="width: 100px"><h5>Name</h5></td>
               <td><h5>Reason</h5></td>
             </tr>
-            
+
+            <% @students.each do |student| %>
             <tr>
-              <td "width: 75px">Mockup User <span class="badge badge-primary">being helped by </span></td>
-              <td>I need help!</td>
+              <td "width: 75px"><%= student.name %>
+                <% if student.being_helped %>
+                <span class="badge badge-primary">
+                  being helped by BLANK
+                </span>
+                <% else %>
+                <span class="badge badge-warning">
+                  waiting
+                </span>
+                <% end %>
+              </td>
+              <td><%= student.reason %></td>
             </tr>
-            <tr>
-              <td "width: 75px">Mockup User <span class="badge badge-warning">waiting</span></td>
-              <td>I need help!</td>
-            </tr>
-            
+            <% end %>
           </table>
         </div>
         
@@ -60,6 +77,28 @@
         
       </div>
       
+    </div>
+
+    <div class="modal fade" id="courseModal" tabindex="-1" role="dialog" aria-labelledby="courseeModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="courseModalLabel">Choose a course to have TA hours for</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <% @courses.each do |course| %>
+            <%= course.name %>
+            <% end %>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Choose this course</button>
+          </div>
+        </div>
+      </div>
     </div>
   </body>
 </html>
