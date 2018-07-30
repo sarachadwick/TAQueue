@@ -13,8 +13,8 @@ Rails.application.routes.draw do
   get '/signup', to: "users#new"
   post '/signup', to: "users#create"
 
-  get '/signup', to: "courses#new"
-  post '/signup', to: "courses#create"
+  get '/create_course', to: "courses#new"
+  post '/create_course', to: "courses#create"
 
   get '/user/:id/start' => 'users#start', as: :start
   get '/user/:id/end' => 'users#end', as: :end
