@@ -11,7 +11,7 @@
     </ul>
   </div>
 <% end %>
-<% else %>
+<% elsif @student %>
 <% if @student.errors.any? %>
   <div id="error_explanation">
     <div class="alert alert-danger">
@@ -23,5 +23,18 @@
     <% end %>
     </ul>
   </div>
-<% end %>
+  <% end %>
+  <% else %>
+  <% if @course.errors.any? %>
+  <div id="error_explanation">
+    <div class="alert alert-danger">
+      The form contains <%= pluralize(@course.errors.count, "error") %>.
+    </div>
+    <ul>
+    <% @course.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+  <% end %>
 <% end %>

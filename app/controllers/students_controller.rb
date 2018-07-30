@@ -16,6 +16,7 @@ class StudentsController < ApplicationController
   def help
     @student = Student.find_by(id: params[:student_id])
     @student.update_attribute(:being_helped, true)
+    @student.update_attribute(:helped_by, params[:ta_name])
   end
 
   def end_session

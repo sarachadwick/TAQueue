@@ -11,7 +11,13 @@
 
       <%= f.label :email %>
       <%= f.email_field :email, class: 'form-control' %>
-
+      
+      <div style = "padding:30px 10px">
+        <%= f.label :course %>
+        <%= f.collection_select :course, Course.all, :id, :name,
+            {:include_blank => true, :include_hidden => false}, {:required => true, :class => 'select'} %>
+      </div>
+      
       <%= f.label :password %>
       <%= f.password_field :password, class: 'form-control' %>
 

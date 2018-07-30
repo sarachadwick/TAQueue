@@ -4,7 +4,7 @@ class CoursesController < ApplicationController
   end
 
   def create
-    @course = Course.new(user_params)
+    @course = Course.new(course_params)
     if @course.save
       redirect_to root_url
     else
@@ -14,7 +14,7 @@ class CoursesController < ApplicationController
 
   private
 
-    def user_params
+    def course_params
       params.require(:prefix, :course_code).permit(:name)
     end
 end

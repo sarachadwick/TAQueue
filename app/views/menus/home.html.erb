@@ -37,7 +37,7 @@
               <td "width: 75px"><%= student.name %>
                 <% if student.being_helped %>
                 <span class="badge badge-primary">
-                  being helped by BLANK
+                  being helped by <%= student.helped_by %>
                 </span>
                 <% if logged_in? %>
                 <%= link_to "End Session", end_session_path(ta_id: current_user.id, student_id: student.id),  :class => "btn btn-info" %>
@@ -47,7 +47,7 @@
                   waiting
                 </span>
                 <% if logged_in? %>
-                <%= link_to "Help", help_path(ta_id: current_user.id, student_id: student.id),  :class => "btn btn-info" %>
+                <%= link_to "Help", help_path(ta_id: current_user.id, student_id: student.id, ta_name: current_user.name),  :class => "btn btn-info" %>
                 <% end %>
                 <% end %>
               </td>
