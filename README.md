@@ -7,4 +7,5 @@ In the future, I want to hook student help sessions up to SIS student IDs, so sc
 Hackweek 2018:
   Sara Chadwick alone, basic features and design
 Hackweek 2019:
+  Avram is helping
   ???
