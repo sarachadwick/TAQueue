@@ -4,7 +4,6 @@ class LtiController < ApplicationController
   # TODO: Nonce verification
 
   def launch
-    puts(params)
     return head 401 unless authenticated?
     return head 403 unless check_timestamp
     redirect_to '/'
@@ -17,30 +16,12 @@ class LtiController < ApplicationController
   end
 
   def header_options
-    @header_options ||= get_header_options
-  end
-
-  def get_header_options
-    raw_auth_header = request.headers['Authorization']
-    return query_params if raw_auth_header.nil?
-    auth_header = {}
-    out_values = raw_auth_header.split(" ")[1]
-    out_values.split(",").each do |option|
-      k, v = option.split("=")
-      auth_header[k.to_sym] = CGI.unescape(v.tr('"', ''))
+    @header_options ||= begin
+      options = params.to_unsafe_hash.deep_symbolize_keys
+      options.delete(:action)
+      options.delete(:controller)
+      options
     end
-    auth_header
-  end
-
-  def query_params
-    {
-      oauth_consumer_key: params[:oauth_consumer_key],
-      oauth_signature_method: params[:oauth_signature_method],
-      oauth_timestamp: params[:oauth_timestamp],
-      oauth_nonce: params[:oauth_nonce],
-      oauth_version: params[:oauth_version],
-      oauth_signature: params[:oauth_signature]
-    }
   end
 
   def url
