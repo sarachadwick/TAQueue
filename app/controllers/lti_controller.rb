@@ -4,6 +4,7 @@ class LtiController < ApplicationController
   # TODO: Nonce verification
 
   def launch
+    puts(params)
     return head 401 unless authenticated?
     return head 403 unless check_timestamp
     redirect_to '/'
