@@ -27,7 +27,6 @@ class StudentsController < ApplicationController
 
   def destroy
     @student.delete
-    redirect_to root_url
   end
   
     private
