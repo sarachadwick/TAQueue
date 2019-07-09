@@ -17,6 +17,7 @@ class StudentsController < ApplicationController
     @student = Student.find_by(id: params[:student_id])
     @student.update_attribute(:being_helped, true)
     @student.update_attribute(:helped_by, params[:ta_name])
+    @student.update_attribute(:helped_at, Time.current)
   end
 
   def end_session
@@ -28,9 +29,9 @@ class StudentsController < ApplicationController
   def destroy
     @student.delete
   end
-  
+
     private
-  
+
     def student_params
       params.require(:student).permit(:name, :reason, :course)
     end
