@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-  after_action :allow_iframe, only: [:launch]
+  after_action :allow_iframe
 
   include SessionsHelper
   include CoursesHelper

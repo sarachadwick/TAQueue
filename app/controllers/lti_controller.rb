@@ -1,6 +1,5 @@
 class LtiController < ApplicationController
   skip_before_action :verify_authenticity_token
-  after_action :allow_iframe, only: [:launch]
   # TODO: Nonce verification
 
   def launch
@@ -41,9 +40,5 @@ class LtiController < ApplicationController
 
   def nonce_expiration_seconds
     600 # 10 minutes
-  end
-
-  def allow_iframe
-    response.headers.except! 'X-Frame-Options'
   end
 end
