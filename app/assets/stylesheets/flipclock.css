@@ -203,7 +203,7 @@
 
 .flip-clock-dot {
     display: block;
-    background: #323434;
+    background: #ccc;
     width: 10px;
     height: 10px;
     position: absolute;
