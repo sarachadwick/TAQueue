@@ -22,7 +22,7 @@ class UsersController < ApplicationController
     @user = User.find_by(id: params[:id])
     @user.update_attribute(:active, true)
     @user.update_attribute(:clocked_in_time, Time.current)
-    if @user.weekly_time == nil
+    if @user.weekly_time == nil || Time.current.wday == 1
       @user.update_attribute(:weekly_time, 0)
     end
   end
