@@ -29,4 +29,6 @@ Rails.application.routes.draw do
   get '/student/:student_id/help' => 'students#help', as: :help
   get 'student/:student_id/end_session' => 'students#end_session', as: :end_session
   resources :users
+
+  post '/lti/launch'
 end
