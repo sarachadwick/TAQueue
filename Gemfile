@@ -31,6 +31,10 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
+gem 'ims-lti', "~> 2.2.3" # LTI v1.0 support
+# gem 'rack-lti', '~> 0.2.0'
+gem 'oauth' # required for LTI tooling ?? maybe
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
