@@ -11,6 +11,7 @@
     -ms-transform: scale(.7);
     text-align: match-parent;
     display: inline-block;
+    pointer-events:none;
 }
 .flip-clock-wrapper * {
     -webkit-box-sizing: border-box;
