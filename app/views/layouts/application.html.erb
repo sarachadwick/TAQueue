@@ -44,36 +44,8 @@
       <% end %>
     </span>
     <div class="btn-group">
-      <head>
-        <script rel="stylesheet" type="text/css" href="../../assets/stylesheets/flipclock.css"></script>
-      </head>
-
-      <body>
-
-      <div class="clock"></div>
-
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/flipclock/0.7.8/flipclock.min.js"></script>
-
-      <script type="text/javascript">
-          var clock = $('.clock').FlipClock(0, {
-              clockFace: 'HourlyCounter'
-          });
-      </script>
-
-      </body>
       <button type="button" class="btn btn-info">
         <% if logged_in? %>
-        <div class="ta-clock">
-          <div class="clock"></div>
-
-          <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-          <script src="https://cdnjs.cloudflare.com/ajax/libs/flipclock/0.7.8/flipclock.min.js"></script>
-
-          <script type="text/javascript">
-            var clock = $('.clock').FlipClock();
-          </script>
-        </div>
         <% if active? %>
         <%= link_to "End TA Hours", end_path(current_user.id),  :class => "btn btn-info" %>
         <% else %>
@@ -84,6 +56,26 @@
         <%= link_to "TA Sign in", login_path,  :class => "btn btn-info" %>
         <% end %>
       </button>
+      <% if active? %>
+        <head>
+          <script rel="stylesheet" type="text/css" href="../../assets/stylesheets/flipclock.css"></script>
+        </head>
+
+        <body>
+
+        <div class="clock"></div>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/flipclock/0.7.8/flipclock.min.js"></script>
+
+        <script type="text/javascript">
+            var clock = $('.clock').FlipClock(0, {
+                clockFace: 'HourlyCounter'
+            });
+        </script>
+
+        </body>
+      <% end %>
     </div>
 </nav>
 
