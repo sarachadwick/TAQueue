@@ -66,8 +66,10 @@
               </tr>
               <% @users.each do |user| %>
                 <% if !user.active.nil? && user.active %>
-                <td><%= user.name %></td>
-                <td>TA is ready to help</td>
+                <tr>
+                  <td><%= user.name %></td>
+                  <td>TA is ready to help</td>
+                </tr>
                 <% end %>
               <% end %>
             <% else %>
