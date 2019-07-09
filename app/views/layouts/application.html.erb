@@ -9,6 +9,7 @@
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <script rel="stylesheet" type="text/css" href="../../assets/stylesheets/flipclock.css"></script>
     <%= csrf_meta_tags %>
   </head>
 
@@ -56,10 +57,7 @@
         <%= link_to "TA Sign in", login_path,  :class => "btn btn-info" %>
         <% end %>
       </button>
-      <% if active? %>
-        <head>
-          <script rel="stylesheet" type="text/css" href="../../assets/stylesheets/flipclock.css"></script>
-        </head>
+      <% if logged_in? %>
 
         <body>
 
@@ -70,8 +68,12 @@
 
         <script type="text/javascript">
             var clock = $('.clock').FlipClock(0, {
-                clockFace: 'HourlyCounter'
+                clockFace: 'HourlyCounter',
+                autoStart: false
             });
+            <% if active? %>
+            clock.start();
+            <% end %>
         </script>
 
         </body>
