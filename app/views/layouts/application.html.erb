@@ -36,12 +36,31 @@
           </li>
       </div>
     </ul>
+  </div>
     <span class="navbar-text">
       <% if logged_in? %>
       <p class="text-white" style="padding:15px 5px 0px"> Logged in as: <br> <%= current_user.name %> </p>
       <% end %>
     </span>
     <div class="btn-group">
+      <head>
+        <script rel="stylesheet" type="text/css" href="../../assets/stylesheets/flipclock.css"></script>
+      </head>
+
+      <body>
+
+      <div class="clock"></div>
+
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/flipclock/0.7.8/flipclock.min.js"></script>
+
+      <script type="text/javascript">
+          var clock = $('.clock').FlipClock(0, {
+              clockFace: 'HourlyCounter'
+          });
+      </script>
+
+      </body>
       <button type="button" class="btn btn-info">
         <% if logged_in? %>
         <% if active? %>
