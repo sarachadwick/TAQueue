@@ -13,3 +13,21 @@
  *= require_tree .
  *= require_self
  */
+
+ h1 {
+   padding-left: 20px;
+   padding-bottom: 20px;
+ }
+
+.new_student {
+  margin: 20px;
+}
+
+.col-md-6 {
+  margin: 20px;
+}
+
+.form-control {
+  width: 50%;
+  margin-bottom: 20px;
+}
