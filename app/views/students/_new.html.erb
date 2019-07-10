@@ -1,9 +1,8 @@
-<% provide(:title, 'Get Help') %>
 <h1>Get Help</h1>
 
 <div>
   <div>
-    <%= form_for(@student, url: get_help_path) do |f| %>
+    <%= form_for(Student.new(), url: get_help_path) do |f| %>
       <%= render 'shared/error_messages' %>
 
       <%= f.label :reason %>

@@ -16,6 +16,12 @@
       </div>
     </center>
 
+    <div class="container-fluid">
+      <% if !is_ta? %>
+      <%= render 'students/new' %>
+      <% end %>
+    </div>
+
     <div class = "container-fluid">
 
       <div class="row">
