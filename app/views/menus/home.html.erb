@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script rel="stylesheet" type="text/css" href="../../assets/stylesheets/flipclock.css"></script>
   </head>
 
   <body>
@@ -48,7 +49,26 @@
                 <% end %>
                 <% end %>
               </td>
-              <td><%= student.reason %></td>
+              <td>
+                <%= student.reason %>
+                <% if student.being_helped? %>
+                  <body>
+
+                  <div align="right" class="student-clock"></div>
+
+                  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+                  <script src="https://cdnjs.cloudflare.com/ajax/libs/flipclock/0.7.8/flipclock.min.js"></script>
+
+                  <script type="text/javascript">
+                      var clock = $('.student-clock').FlipClock(0, {
+                          clockFace: 'HourlyCounter',
+                          autoStart: true
+                      });
+                  </script>
+
+                  </body>
+                <% end %>
+              </td>
             </tr>
             <% end %>
           </table>
