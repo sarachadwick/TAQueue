@@ -8,6 +8,14 @@ class LtiController < ApplicationController
     redirect_to '/'
   end
 
+  def config
+    send_file("#{Rails.root}/app/assets/xml/url_config.xml",
+              :filename => "url_config.xml",
+              :disposition => "inline")
+  end
+
+  private
+
   def authenticated?
     # TODO: Ask William about Keys
     authenticator = IMS::LTI::Services::MessageAuthenticator.new(url, header_options, 'secret')

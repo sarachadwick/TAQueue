@@ -31,4 +31,5 @@ Rails.application.routes.draw do
   resources :users
 
   post '/lti/launch'
+  get '/lti/config'
 end
