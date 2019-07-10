@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   def show
-    @user = User.find(params[:id])
+    @user = User.find(current_user.id)
   end
 
   def new
@@ -34,6 +34,28 @@ class UsersController < ApplicationController
     @user.update_attribute(:active, false)
     @user.update_attribute(:weekly_time, (@session_time + @user.weekly_time))
     @user.update_attribute(:clocked_in_time, :nil)
+  end
+
+  def dashboard
+    puts(params)
+    @user = User.find_by(id: current_user.id)
+    @users = User.all
+    if @user.weekly_hours.nil?
+      #enter hours
+      @set_hours = false
+    else
+      @set_hours = true
+      @hours_worked = { "Worked" => @user.weekly_time,
+                        "Hours Left" => (@user.weekly_hours - @user.weekly_time) }
+    end
+  end
+
+  def edit
+    puts('-----------')
+    puts(params)
+    @user = User.find_by(id: current_user.id)
+    @user.update_attribute(:weekly_hours, params[:user][:weekly_hours])
+    redirect_back(fallback_location: root_path)
   end
 
   private

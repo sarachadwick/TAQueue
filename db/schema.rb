@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190709191553) do
+ActiveRecord::Schema.define(version: 20190710144509) do
 
   create_table "courses", force: :cascade do |t|
     t.string "name"
@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(version: 20190709191553) do
     t.decimal "canvas_id"
     t.decimal "course_id"
     t.boolean "ta"
+    t.integer "weekly_hours"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 

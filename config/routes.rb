@@ -9,6 +9,9 @@ Rails.application.routes.draw do
 
   get 'sessions/new'
 
+  get '/users/dashboard'
+  patch '/users/edit'
+  
   root 'menus#home'  
   get '/signup', to: "users#new"
   post '/signup', to: "users#create"
