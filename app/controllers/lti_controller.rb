@@ -7,6 +7,7 @@ class LtiController < ApplicationController
     return head 403 unless check_timestamp
     return head 401 if params["context_id"].nil? || params["user_id"].nil?
     return head 401 if course.nil? || user.nil?
+    puts(params)
 
     log_in(user)
     redirect_to '/'
@@ -55,8 +56,7 @@ class LtiController < ApplicationController
       canvas_id: params["user_id"],
       course: params["context_title"],
       course_id: params["context_id"],
-      email: "user@example.com",
-      password: "you-will-never-ever-guess"
+      ta: params["roles"] != "Learner"
     }
   end
 
