@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190710144509) do
+ActiveRecord::Schema.define(version: 20190710184607) do
 
   create_table "courses", force: :cascade do |t|
     t.string "name"
@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 20190710144509) do
     t.text "tas"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.decimal "course_id"
+    t.string "course_id"
   end
 
   create_table "students", force: :cascade do |t|
@@ -44,8 +44,8 @@ ActiveRecord::Schema.define(version: 20190710144509) do
     t.string "course"
     t.integer "weekly_time"
     t.datetime "clocked_in_time"
-    t.decimal "canvas_id"
-    t.decimal "course_id"
+    t.string "canvas_id"
+    t.string "course_id"
     t.boolean "ta"
     t.integer "weekly_hours"
     t.index ["email"], name: "index_users_on_email", unique: true

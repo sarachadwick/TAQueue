@@ -5,24 +5,10 @@ class LtiController < ApplicationController
   def launch
     return head 401 unless authenticated?
     return head 403 unless check_timestamp
+    return head 401 if params["context_id"].nil? || params["user_id"].nil?
+    return head 401 if course.nil? || user.nil?
 
-    return head 401 if params["context_id"].nil?
-    return head 401 if params["user_id"].nil?
-
-    @course = Course.find_by(course_id: params["context_id"])
-
-    if @course.nil?
-      course_params = {name: params["context_title"], course_id: params["context_id"]}
-      @course = Course.new(course_params)
-    end
-
-    @user = User.find_by(canvas_id: params["user_id"])
-
-    if @user.nil?
-      user_params = {name: params["lis_person_name_full"], canvas_id: params["user_id"], course: params["context_title"], course_id: params["context_id"]}
-      @user = User.new(user_params)
-    end
-    log_in(@user)
+    log_in(user)
     redirect_to '/'
   end
 
@@ -33,6 +19,46 @@ class LtiController < ApplicationController
   end
 
   private
+
+  def course
+    @course ||= begin
+      tmp_course = Course.find_by(course_id: params["context_id"])
+      if tmp_course.nil?
+        tmp_course = Course.new(course_params)
+        tmp_course.save!
+      end
+      tmp_course
+    end
+  end
+
+  def user
+    @user ||= begin
+      tmp_user = User.find_by(canvas_id: params["user_id"])
+      if tmp_user.nil?
+        tmp_user = User.new(user_params)
+        tmp_user.save!
+      end
+      tmp_user
+    end
+  end
+
+  def course_params
+    {
+      name: params["context_title"],
+      course_id: params["context_id"]
+    }
+  end
+
+  def user_params
+    {
+      name: params["lis_person_name_full"],
+      canvas_id: params["user_id"],
+      course: params["context_title"],
+      course_id: params["context_id"],
+      email: "user@example.com",
+      password: "you-will-never-ever-guess"
+    }
+  end
 
   def authenticated?
     # TODO: Ask William about Keys
