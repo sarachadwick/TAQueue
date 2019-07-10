@@ -5,6 +5,24 @@ class LtiController < ApplicationController
   def launch
     return head 401 unless authenticated?
     return head 403 unless check_timestamp
+
+    return head 401 if params["context_id"].nil?
+    return head 401 if params["user_id"].nil?
+
+    @course = Course.find_by(course_id: params["context_id"])
+
+    if @course.nil?
+      course_params = {name: params["context_title"], course_id: params["context_id"]}
+      @course = Course.new(course_params)
+    end
+
+    @user = User.find_by(canvas_id: params["user_id"])
+
+    if @user.nil?
+      user_params = {name: params["lis_person_name_full"], canvas_id: params["user_id"], course: params["context_title"], course_id: params["context_id"]}
+      @user = User.new(user_params)
+    end
+    log_in(@user)
     redirect_to '/'
   end
 
