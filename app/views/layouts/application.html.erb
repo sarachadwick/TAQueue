@@ -29,12 +29,14 @@
   <div class="collapse navbar-collapse" id="navbarContent">
     <ul class="navbar-nav mr-auto">
       <div class="btn-group">
+        <% if !is_ta? %>
         <li class="nav-item">
           <%= link_to "Home", root_url, :class => "nav-link" %>
         </li>
         <li class="nav-item">
           <%= link_to "Get Help", get_help_path,  :class => "nav-link" %>
         </li>
+        <% end %>
       </div>
     </ul>
   </div>
@@ -44,19 +46,17 @@
       <% end %>
     </span>
     <div class="btn-group">
+      <% if is_ta? %>
       <button type="button" class="btn btn-info">
-        <% if logged_in? %>
         <% if active? %>
         <%= link_to "End TA Hours", end_path(current_user.id),  :class => "btn btn-info" %>
         <% else %>
         <%= link_to "Start TA Hours", start_path(current_user.id),  :class => "btn btn-info" %>
         <% end %>
         <%= link_to "Sign out", logout_path(id: current_user.id),  method: :delete, :class => "btn btn-info" %>
-        <% else %>
-        <%= link_to "TA Sign in", login_path,  :class => "btn btn-info" %>
-        <% end %>
       </button>
-      <% if logged_in? %>
+      <% end %>
+      <% if is_ta? %>
 
         <body>
 

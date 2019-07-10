@@ -6,17 +6,8 @@
     <%= form_for(@student, url: get_help_path) do |f| %>
       <%= render 'shared/error_messages' %>
 
-      <%= f.label :name %>
-      <%= f.text_field :name, class: 'form-control' %>
-      
       <%= f.label :reason %>
       <%= f.text_field :reason, class: 'form-control' %>
-      
-      <div style = "padding:30px 10px">
-        <%= f.label :course %>
-        <%= f.collection_select :course, Course.all, :id, :name,
-            {:include_blank => true, :include_hidden => false}, {:required => true, :class => 'select'} %>
-      </div>
       
       <%= f.submit "Sign In For Help", class: "btn btn-primary" %>
     <% end %>

@@ -7,7 +7,6 @@ class LtiController < ApplicationController
     return head 403 unless check_timestamp
     return head 401 if params["context_id"].nil? || params["user_id"].nil?
     return head 401 if course.nil? || user.nil?
-    puts(params)
 
     log_in(user)
     redirect_to '/'
@@ -61,7 +60,6 @@ class LtiController < ApplicationController
   end
 
   def authenticated?
-    # TODO: Ask William about Keys
     authenticator = IMS::LTI::Services::MessageAuthenticator.new(url, header_options, 'secret')
     authenticator.valid_signature?
   end

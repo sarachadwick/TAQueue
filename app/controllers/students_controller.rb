@@ -1,6 +1,5 @@
 class StudentsController < ApplicationController
   def new
-    @courses = Course.all
     @student = Student.new
   end
 
@@ -33,6 +32,11 @@ class StudentsController < ApplicationController
     private
 
     def student_params
-      params.require(:student).permit(:name, :reason, :course)
+      params.require(:student).permit(:reason)
+      {
+        name: current_user.name,
+        course: current_course,
+        reason: params[:student][:reason]
+      }
     end
 end

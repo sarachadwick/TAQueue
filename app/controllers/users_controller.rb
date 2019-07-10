@@ -38,7 +38,6 @@ class UsersController < ApplicationController
   end
 
   def dashboard
-    puts(params)
     @user = User.find_by(id: current_user.id)
     @users = User.all
     if @user.weekly_hours.nil?
@@ -52,8 +51,6 @@ class UsersController < ApplicationController
   end
 
   def edit
-    puts('-----------')
-    puts(params)
     @user = User.find_by(id: current_user.id)
     @user.update_attribute(:weekly_hours, params[:user][:weekly_hours])
     redirect_back(fallback_location: root_path)
@@ -64,5 +61,5 @@ class UsersController < ApplicationController
   def user_params
       params.require(:user).permit(:name, :email, :password,
                                    :password_confirmation)
-    end
+  end
 end
