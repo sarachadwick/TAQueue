@@ -75,7 +75,9 @@
           clock.setTime(<%= Time.current - current_user.clocked_in_time + current_user.weekly_time %>);
           clock.start();
           <% else %>
-          clock.setTime(<%= current_user.weekly_time %>);
+            <% if current_user.weekly_time != nil %>
+              clock.setTime(<%= current_user.weekly_time %>);
+            <% end %>
           <% end %>
         </script>
 
