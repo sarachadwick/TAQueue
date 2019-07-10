@@ -13,6 +13,19 @@
     display: inline-block;
     pointer-events:none;
 }
+.student-clock {
+    position: relative !important;
+    padding-top: 0px;
+    margin-left: -194px;
+    /*height: 100px;*/
+    /*width: 800px;*/
+    zoom: .5;
+    transform: scale(.5);
+    -ms-transform: scale(.5);
+    text-align: right;
+    display: inline-block;
+    pointer-events:none;
+}
 .flip-clock-wrapper * {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;

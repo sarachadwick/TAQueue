@@ -50,11 +50,10 @@
                 <% end %>
               </td>
               <td>
+                <div class="btn-group">
                 <%= student.reason %>
                 <% if student.being_helped? %>
-                  <body>
-
-                  <div align="right" class="student-clock"></div>
+                  <div class="student-clock"></div>
 
                   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
                   <script src="https://cdnjs.cloudflare.com/ajax/libs/flipclock/0.7.8/flipclock.min.js"></script>
@@ -65,9 +64,8 @@
                           autoStart: true
                       });
                   </script>
-
-                  </body>
                 <% end %>
+                </div>
               </td>
             </tr>
             <% end %>
