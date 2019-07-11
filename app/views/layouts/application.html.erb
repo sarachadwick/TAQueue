@@ -37,32 +37,30 @@
       <p class="text-white" style="padding:15px 5px 0px"> Logged in as: <br> <%= current_user.name %> </p>
       <% end %>
     </span>
-    <div class="btn-group">
+    <div class="btn-group clockin-group">
       <% if is_ta? %>
-      <button type="button" class="btn btn-info">
         <% if active? %>
-        <%= link_to "End TA Hours", end_path(current_user.id),  :class => "btn btn-info" %>
+        <form class="clockin-btn" action="<%= end_path(current_user.id) %>">
+        <button type="submit" class="btn btn-info">
+          End TA Hours
+        </button>
+        </form>
         <% else %>
-        <%= link_to "Start TA Hours", start_path(current_user.id),  :class => "btn btn-info" %>
+        <form class="clockin-btn" action="<%= start_path(current_user.id) %>">
+        <button type="submit" class="btn btn-info">
+          Start TA Hours
+        </button>
+        </form>
         <% end %>
-        <%= link_to "Sign out", logout_path(id: current_user.id),  method: :delete, :class => "btn btn-info" %>
-      </button>
-      <% end %>
-      <% if is_ta? %>
-
         <body>
-
         <div class="clock"></div>
-
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/flipclock/0.7.8/flipclock.min.js"></script>
-
         <script type="text/javascript">
           var clock = new FlipClock($('.clock'),{
               clockFace: 'HourlyCounter',
               autoStart: false
           });
-
           <% if active? %>
           clock.setTime(<%= Time.current - current_user.clocked_in_time + current_user.weekly_time %>);
           clock.start();
@@ -72,22 +70,16 @@
             <% end %>
           <% end %>
         </script>
-
         </body>
       <% end %>
     </div>
 </nav>
 
-
-
 </header>
-
 <body>
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-
   <%= yield %>
 </body>
-
 </html>
