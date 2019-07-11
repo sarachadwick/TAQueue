@@ -39,14 +39,22 @@ class UsersController < ApplicationController
 
   def dashboard
     @user = User.find_by(id: current_user.id)
+    @semester = Semester.find_by(course_id: @user.course_id)
     @users = User.all
+    
     if @user.weekly_hours.nil?
-      #enter hours
       @set_hours = false
     else
       @set_hours = true
-      @hours_worked = { "Worked" => @user.weekly_time,
-                        "Hours Left" => (@user.weekly_hours - @user.weekly_time) }
+      @hours_worked = { "Worked" => (@user.weekly_time/3600),
+                        "Hours Left" => (@user.weekly_hours - (@user.weekly_time/3600)) }
+    end
+
+    if @semester.nil?
+      @set_semester = false
+    else
+      @set_semester = true
+      @help_averages = get_help_averages
     end
   end
 
@@ -63,6 +71,41 @@ class UsersController < ApplicationController
   end
 
   private
+
+  def get_help_averages
+    help_averages = {}
+    start_date = Semester.find_by(course_id: current_user.course_id).start_date
+    semester_length = Semester.find_by(course_id: current_user.course_id).semester_length
+    current_date = 0
+    
+    for week in 0..semester_length
+      week_start = start_date + current_date.days
+      week_end =  start_date + current_date.days + 7.day
+      help_times = Student.where(["session_end >= ? and session_end < ? and course_id = ? and ta_id = ?",
+                                  week_start, week_end, current_user.course_id, current_user.canvas_id])
+      count = 0.0
+      sum = 0.0
+      
+      for session in help_times do
+        count += 1.0
+        sum += ((session.session_end - session.helped_at)/60).to_d
+        puts('-------------------')
+        puts(count)
+        puts('-------------------')
+        puts(sum)
+      end
+      if count != 0
+        help_averages[week] = sum/count
+      else
+        help_averages[week] = 0
+      end
+
+      current_date += 7
+    end
+
+    return help_averages
+    #return {"1" => "2", "2" => "3"}
+  end
 
   def user_params
       params.require(:user).permit(:name, :email, :password,

@@ -1,16 +1,29 @@
 <% provide(:title, 'Dashboard') %>
 <h1>Dashboard</h1>
-<% if @set_hours %>
-<%= pie_chart @hours_worked %>
-<% else %>
-<div class="row">
-  <div class="col-md-6 col-md-offset-3">
-     <%= form_for(@user, url: users_edit_url(params[:id])) do |f| %>
-      <%= f.label :weekly_hours %>
-      <%= f.text_field :weekly_hours %>
+<div display="flex">
+  <div>
+    <% if @set_hours %>
+    <%= pie_chart @hours_worked %>
+    <% else %>
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+         <%= form_for(@user, url: users_edit_url(params[:id])) do |f| %>
+         <%= f.label :weekly_hours %>
+         <%= f.text_field :weekly_hours %>
 
-      <%= f.submit "Add Weekly Hours", class: "btn btn-primary" %>
+         <%= f.submit "Add Weekly Hours", class: "btn btn-primary" %>
+         <% end %>
+      </div>
+    </div>
+    <% end %>
+  </div>
+  <div>
+    <% if @set_semester %>
+    <%= area_chart @help_averages %>
+    <% else %>
+    <div class="container-fluid">
+      <%= render 'semesters/new' %>
+    </div>
     <% end %>
   </div>
 </div>
-<% end %>

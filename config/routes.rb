@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get 'sessions/new'
 
   get '/users/dashboard'
+  post '/create_semester', to: 'semesters#create'
   patch '/users/edit'
   
   root 'menus#home'  
