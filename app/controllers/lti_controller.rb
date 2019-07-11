@@ -33,7 +33,7 @@ class LtiController < ApplicationController
 
   def user
     @user ||= begin
-      tmp_user = User.find_by(canvas_id: params["user_id"])
+      tmp_user = User.find_by(canvas_id: params["user_id"], course_id: params["context_id"])
       if tmp_user.nil?
         tmp_user = User.new(user_params)
         tmp_user.save!

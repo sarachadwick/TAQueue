@@ -45,7 +45,8 @@ class StudentsController < ApplicationController
         name: current_user.name,
         course: current_course,
         reason: params[:student][:reason],
-        student_id: current_user.canvas_id
+        student_id: current_user.canvas_id,
+        course_id: current_course.course_id
       }
     end
 end
