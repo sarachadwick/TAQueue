@@ -56,6 +56,12 @@ class UsersController < ApplicationController
     redirect_back(fallback_location: root_path)
   end
 
+  def set_limit
+    @user = User.find_by(id: current_user.id)
+    @user.update_attribute(:limit, params[:new_limit])
+    redirect_back(fallback_location: root_path)
+  end
+
   private
 
   def user_params

@@ -6,6 +6,7 @@ class MenusController < ApplicationController
       @courses = Course.all
       @students = Student.where(session_end: nil)
       @students = Student.where(["course_id = ? and session_end is ?", current_user.course_id, nil])
+      @current_limit = User.find(current_user.id).limit
     end
   end
 

@@ -1,6 +1,55 @@
 <header id="navbar">
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <a class="navbar-brand" href="#"><%= link_to "TA Queue", root_url, :class => "navbar-brand" %></a>
+  <% if is_ta? %>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+      .dropbtn {
+        background-color: #4CAF50;
+        color: white;
+        padding: 16px;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+      }
+
+      .dropdown {
+        position: relative;
+        display: inline-block;
+      }
+
+      .dropdown-content {
+        display: none;
+        position: absolute;
+        right: 0;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+      }
+
+      .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+      }
+      .dropdown-content a:hover {background-color: #f1f1f1;}
+      .dropdown:hover .dropdown-content {display: block;}
+      .dropdown:hover .dropbtn {background-color: #3e8e41;}
+    </style>
+    </head>
+    <body>
+
+    <div class="dropdown" style="float:right;">
+      <button class="dropbtn">Time Limit</button>
+      <div class="dropdown-content">
+        <%= link_to '5 min', user_set_limit_url(:new_limit => 5), method: :post %>
+        <%= link_to '10 min', user_set_limit_url(:new_limit => 10), method: :post %>
+        <%= link_to '20 min', user_set_limit_url(:new_limit => 20), method: :post %>
+      </div>
+    </div>
+  <% end %>
 
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>

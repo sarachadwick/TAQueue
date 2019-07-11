@@ -21,6 +21,7 @@ Rails.application.routes.draw do
 
   get '/user/:id/start' => 'users#start', as: :start
   get '/user/:id/end' => 'users#end', as: :end
+  post '/user/set_limit' => 'users#set_limit'
  
   get    '/login',   to: 'sessions#new'
   post   '/login',   to: 'sessions#create'

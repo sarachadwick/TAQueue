@@ -32,6 +32,8 @@ class LtiController < ApplicationController
   end
 
   def user
+    puts User.last.inspect
+    puts Student.last.inspect
     @user ||= begin
       tmp_user = User.find_by(canvas_id: params["user_id"], course_id: params["context_id"])
       if tmp_user.nil?

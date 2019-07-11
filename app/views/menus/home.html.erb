@@ -55,9 +55,11 @@
               <script src="https://cdnjs.cloudflare.com/ajax/libs/flipclock/0.7.8/flipclock.min.js"></script>
 
               <script type="text/javascript">
-                  var clock = $('.student-clock').FlipClock(0, {
+                  var limit =<%=@current_limit%>
+                  var clock = $('.student-clock').FlipClock(limit * 60, {
                       clockFace: 'HourlyCounter',
-                      autoStart: true
+                      autoStart: true,
+                      countdown: true
                   });
               </script>
             <% end %>
