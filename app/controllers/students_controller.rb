@@ -14,6 +14,9 @@ class StudentsController < ApplicationController
   end
 
   def help
+    if User.find_by(id: params[:ta_id]).active == false
+      return
+    end
     @student = Student.find_by(id: params[:student_id])
     @student.update_attributes(:being_helped => true,
                                :helped_by => params[:ta_name],
@@ -22,6 +25,9 @@ class StudentsController < ApplicationController
   end
 
   def end_session
+    if User.find_by(id: params[:ta_id]).active == false
+      return
+    end
     @student = Student.find_by(id: params[:student_id])
     @student.update_attributes(:being_helped => false,
                                :session_end => Time.current)
