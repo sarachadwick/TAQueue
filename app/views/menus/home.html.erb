@@ -37,28 +37,21 @@
             </tr>
 
             <% @students.each do |student| %>
-            <script type="text/javascript">
-              <% if !active? %>
-              $('.help-link').click(function(e){
-                e.preventDefault();
-              });
-              <% end %>
-            </script>
             <tr>
               <td "width: 75px"><%= student.name %>
                 <% if student.being_helped %>
                 <span class="badge badge-primary">
                   being helped by <%= student.helped_by %>
                 </span>
-                <% if is_ta? %>
-                <%= link_to "End Session", end_session_path(ta_id: current_user.id, student_id: student.id),  :class => "btn btn-info help-link" %>
+                <% if is_ta? && active? %>
+                <%= link_to "End Session", end_session_path(ta_id: current_user.id, student_id: student.id),  :class => "btn btn-info" %>
                 <% end %>
                 <% else %>
                 <span class="badge badge-warning">
                   waiting
                 </span>
-                <% if is_ta? %>
-                <%= link_to "Help", help_path(ta_id: current_user.id, student_id: student.id, ta_name: current_user.name),  :class => "btn btn-info help-link" %>
+                <% if is_ta? && active?%>
+                <%= link_to "Help", help_path(ta_id: current_user.id, student_id: student.id, ta_name: current_user.name),  :class => "btn btn-info" %>
                 <% end %>
                 <% end %>
               </td>
