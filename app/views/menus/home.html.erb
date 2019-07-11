@@ -1,41 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <script rel="stylesheet" type="text/css" href="../../assets/stylesheets/flipclock.css"></script>
-  </head>
-
-  <body>
-    <center>
-      <div class="d-flex justify-content-center">
-        <div class = "container-fluid" style="margin:25px">
-        </div>
-      </div>
-    </center>
-
-    <div class="container-fluid">
-      <% if !is_ta? %>
-      <%= render 'students/new' %>
-      <% end %>
+<% if logged_in? %>
+<center>
+  <div class="d-flex justify-content-center">
+    <div class = "container-fluid" style="margin:25px">
     </div>
+  </div>
+</center>
 
-    <div class = "container-fluid">
+<div class="container-fluid">
+  <% if !is_ta? %>
+  <%= render 'students/new' %>
+  <% end %>
+</div>
 
-      <div class="row">
+<div class = "container-fluid">
 
-        <div class="col-lg-8">
-          <table class="table table-striped table-hover" style="table-layout: fixed">
-            <tr>
-              <th colspan="2"><h3>Students</h3></th>
-            </tr>
-            <tr>
-              <td style="width: 100px"><h5>Name</h5></td>
-              <td><h5>Reason</h5></td>
-            </tr>
+  <div class="row">
 
+    <div class="col-lg-8">
+      <table class="table table-striped table-hover" style="table-layout: fixed">
+        <tr>
+          <th colspan="2"><h3>Students</h3></th>
+        </tr>
+        <tr>
+          <td style="width: 100px"><h5>Name</h5></td>
+          <td><h5>Reason</h5></td>
+        </tr>
             <% @students.each do |student| %>
             <tr>
               <td "width: 75px"><%= student.name %>
@@ -61,73 +50,75 @@
                 <% if student.being_helped? %>
                   <div class="student-clock"></div>
 
-                  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-                  <script src="https://cdnjs.cloudflare.com/ajax/libs/flipclock/0.7.8/flipclock.min.js"></script>
 
-                  <script type="text/javascript">
-                      var clock = $('.student-clock').FlipClock(0, {
-                          clockFace: 'HourlyCounter',
-                          autoStart: true
-                      });
-                  </script>
-                <% end %>
-                </div>
-              </td>
-            </tr>
+              <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+              <script src="https://cdnjs.cloudflare.com/ajax/libs/flipclock/0.7.8/flipclock.min.js"></script>
+
+              <script type="text/javascript">
+                  var clock = $('.student-clock').FlipClock(0, {
+                      clockFace: 'HourlyCounter',
+                      autoStart: true
+                  });
+              </script>
             <% end %>
-          </table>
-        </div>
+            </div>
+          </td>
+        </tr>
+        <% end %>
+      </table>
+    </div>
 
-        <div class="col-lg-4">
-          <table class="table table-hover table-striped">
+    <div class="col-lg-4">
+      <table class="table table-hover table-striped">
+        <tr>
+          <th colspan="2"><h3>TAs</h3></th>
+        </tr>
+        <% if hasActiveUser? %>
+          <tr>
+            <td><h5>Name</h5></td>
+            <td><h5>Status</h5></td>
+          </tr>
+          <% @users.each do |user| %>
+            <% if !user.active.nil? && user.active %>
             <tr>
-              <th colspan="2"><h3>TAs</h3></th>
+              <td><%= user.name %></td>
+              <td>TA is ready to help</td>
             </tr>
-            <% if hasActiveUser? %>
-              <tr>
-                <td><h5>Name</h5></td>
-                <td><h5>Status</h5></td>
-              </tr>
-              <% @users.each do |user| %>
-                <% if !user.active.nil? && user.active %>
-                <tr>
-                  <td><%= user.name %></td>
-                  <td>TA is ready to help</td>
-                </tr>
-                <% end %>
-              <% end %>
-            <% else %>
-              <tr>
-                <td>There are no TAs with hours right now</td>
-              </tr>
             <% end %>
-          </table>
-        </div>
-
-      </div>
-
+          <% end %>
+        <% else %>
+          <tr>
+            <td>There are no TAs with hours right now</td>
+          </tr>
+        <% end %>
+      </table>
     </div>
 
-    <div class="modal fade" id="courseModal" tabindex="-1" role="dialog" aria-labelledby="courseeModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="courseModalLabel">Choose a course to have TA hours for</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <% @courses.each do |course| %>
-            <%= course.name %>
-            <% end %>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Choose this course</button>
-          </div>
-        </div>
+  </div>
+
+</div>
+
+<div class="modal fade" id="courseModal" tabindex="-1" role="dialog" aria-labelledby="courseeModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="courseModalLabel">Choose a course to have TA hours for</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <% @courses.each do |course| %>
+        <%= course.name %>
+        <% end %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Choose this course</button>
       </div>
     </div>
-  </body>
-</html>
+  </div>
+</div>
+<% else %>
+<%= render "shared/default_landing" %>
+<% end %>

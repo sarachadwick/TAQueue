@@ -16,6 +16,8 @@ module SessionsHelper
   end
 
   def logged_in?
+    puts("HELLO!!!\n" * 5)
+    puts(current_user)
     !current_user.nil?
   end
 
