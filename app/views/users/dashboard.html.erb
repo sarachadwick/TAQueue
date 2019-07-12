@@ -1,9 +1,9 @@
 <% provide(:title, 'Dashboard') %>
 <h1>Dashboard</h1>
-<div display="flex">
-  <div>
+<div class="flex-container">
+  <div class="flex-kids">
     <% if @set_hours %>
-    <%= pie_chart @hours_worked %>
+    <%= pie_chart @hours_worked, donut: true %>
     <% else %>
     <div class="row">
       <div class="col-md-6 col-md-offset-3">
@@ -17,9 +17,9 @@
     </div>
     <% end %>
   </div>
-  <div>
+  <div class="flex-kids">
     <% if @set_semester %>
-    <%= area_chart @help_averages %>
+    <%= area_chart @help_averages, width: "400px" %>
     <% else %>
     <div class="container-fluid">
       <%= render 'semesters/new' %>

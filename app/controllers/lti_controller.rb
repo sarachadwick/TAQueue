@@ -9,7 +9,11 @@ class LtiController < ApplicationController
     return head 401 if course.nil? || user.nil?
 
     log_in(user)
-    redirect_to '/'
+    if current_user.ta?
+      redirect_to users_dashboard_url
+    else
+      redirect_to '/'
+    end
   end
 
   def config
