@@ -33,6 +33,14 @@ class StudentsController < ApplicationController
                                :session_end => Time.current)
   end
 
+  def end_student_session
+      @student = Student.find_by(student_id: params[:student_id])
+      @student.update_attributes(:being_helped => false,
+                                :session_end => Time.current)
+      destroy
+      redirect_to root_url
+  end
+
   def destroy
     @student.delete
   end
@@ -48,5 +56,9 @@ class StudentsController < ApplicationController
         student_id: current_user.canvas_id,
         course_id: current_course.course_id
       }
+    end
+
+    def _new
+      @current_user_session_id = current_user.canvas_id
     end
 end

@@ -8,7 +8,8 @@
       <%= f.label :reason %>
       <%= f.text_field :reason, class: 'form-control' %>
       
-      <%= f.submit "Sign In For Help", class: "btn btn-primary" %>
-    <% end %>
+      <%= f.submit "Enter Queue", class: "btn btn-primary", :disabled => @is_session_active %>
+      <%= link_to "Leave Queue", end_student_session_path(student_id: current_user.canvas_id), :class => "btn btn-info" %>
+      <% end %>
   </div>
 </div>
