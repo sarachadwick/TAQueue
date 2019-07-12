@@ -62,7 +62,10 @@
   </div>
     <% if logged_in? %>
     <span class="navbar-text">
-      <p class="text-white" style="padding:15px 5px 0px"> Logged in as: <br> <%= current_user.name %> </p>
+      <p class="text-white" style="padding:15px 5px 0px">
+	Logged in as: <br> <%= current_user.name %>
+	<br> <%= current_course.name %>
+      </p>
     </span>
     <div class="btn-group clockin-group">
       <% if is_ta? %>
