@@ -1,13 +1,12 @@
 <% provide(:title, 'Create Semester') %>
-<h1>Create Semester</h1>
 
 <div class="col-md-6 col-md-offset-3">
   <%= form_for(Semester.new(), url: create_semester_url) do |f| %>
-  <%= f.label :semester_length %>
-  <%= f.text_field :semester_length %>
+  <%= f.label :semester_length, class: 'col-sm-2' %>
+  <%= f.text_field :semester_length, class: 'form-control' %>
 
-  <%= f.label :start_date %>
-  <%= f.text_field :start_date %>
+  <%= f.label :start_date, class: 'col-sm-2' %>
+  <%= f.text_field :start_date, class: 'form-control'  %>
 
   <%= f.submit "Create Semester", class: "btn btn-primary" %>
   <% end %>
