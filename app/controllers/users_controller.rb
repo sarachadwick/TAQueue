@@ -46,8 +46,13 @@ class UsersController < ApplicationController
       @set_hours = false
     else
       @set_hours = true
-      @hours_worked = { "Worked" => (@user.weekly_time/3600),
-                        "Hours Left" => (@user.weekly_hours - (@user.weekly_time/3600)) }
+      if @user.weekly_time.nil?
+        @hours_worked = { "Worked" => 0,
+                          "Hours Left" => @user.weekly_hours }
+      else
+        @hours_worked = { "Worked" => (@user.weekly_time/3600),
+                          "Hours Left" => (@user.weekly_hours - (@user.weekly_time/3600)) }
+      end
     end
 
     if @semester.nil?
